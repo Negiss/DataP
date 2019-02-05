@@ -5,9 +5,10 @@ DATABASE_URL=mysql://db_user:db_password@127.0.0.1:3306/db_name
 
 
 A few commands :
-3. php bin/console d:d:c
+
+3. php bin/console doctrine:database:create (d:d:c)
 4. php bin/console m:migration
-5. php bin/console d:m:m
+5. php bin/console doctrine:migrations:migrate (d:m:m)
 
 And you're ready to go !
 <br>
@@ -15,6 +16,7 @@ And you're ready to go !
 
 <br>
 Last things : I can't find a way to get the Address (with CollectionType field) working..
+
 And I need to make the display of the name file in the upload input (but that I just didn't start to look at it)
 
 - Made in a few days while at school
