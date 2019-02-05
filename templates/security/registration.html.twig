@@ -1,0 +1,47 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+<div class="container text-center w-75 login mt-5 pt-5 pb-3 mb-5">
+    <h3 class="pb-5 regis"><span class="underline">Registration</span> :</h3>
+    <div class="form-row pb-4">
+        <div class="col-4">
+            {{ form_start(form) }}
+            {{ form_row(form.username, {'label' : '- Firstname', 'attr' : {
+                'class' : 'form-control',
+                'placeholder' : '...'
+            }}) }}
+        </div>
+        <div class="col-4">
+            {{ form_row(form.lastname, {'label' : 'Lastname', 'attr' : {
+                'class' : 'form-control'
+            }}) }}
+        </div>
+        <div class="col-4">
+            {{ form_row(form.birthdate, {'label' : 'Birthdate -', 'attr' : {
+                'class' : 'form-control'
+            }}) }}
+        </div>
+    </div>
+        {{ form_row(form.email, {'label' : '- Email -', 'attr' : {
+            'class' : 'form-control',
+            'placeholder' : 'exemple@mail.com'
+        }}) }}
+
+    <div class="form-row pt-4">
+        <div class="col-6">
+            {{ form_row(form.password, {'label' : '- Password', 'attr' : {
+                'class' : 'form-control',
+                'placeholder' : '...'
+            }}) }}
+        </div>
+        <div class="col-6">
+            {{ form_row(form.passwordConfirm, {'label' : 'Confirm password -', 'attr' : {
+                'class' : 'form-control',
+                'placeholder' : 'Confirm your password'
+            }}) }}
+        </div>
+    </div>
+    <button type="submit" class="btn btn-success mt-4 mb-3">Register</button>
+            {{ form_end(form) }}
+</div>
+{% endblock %}

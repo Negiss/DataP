@@ -1,0 +1,31 @@
+<nav class="navbar navbar-expand-lg navbar-light">
+    <div class="container-fluid">
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar" aria-controls="navbarColor03" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbar">
+            <ul class="nav navbar-nav">
+                <li class="nav-item active">
+                    <a class="nav-link" href="{{ path('home') }}">Home <span class="sr-only">(current)</span></a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Somewhere</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Somewhere else</a>
+                </li>
+            </ul>
+        </div>
+        <ul class="nav navbar-nav center-x">
+            <li class=""><a class="datap navbar-collapse" href="{{ path('login') }}"><strong>Data<span class="data">P</span><span class="blink">_</span></strong></a></li>
+        </ul>
+        <div class="ml-auto nav navbar-nav">
+            {% if app.user %}
+                <a class="nav-link" href="{{ path('profile') }}"><i class="fas fa-user-circle fa-3x mr-4"></i></a>
+                <a class="nav-link" href="{{ path('logout') }}"><i class="fas fa-power-off fa-3x"></i></a>
+            {% else %}
+                <a class="nav-link"><i class="far fa-user-circle fa-3x"></i></a>
+            {% endif %}
+        </div>
+    </div>
+</nav>

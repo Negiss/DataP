@@ -1,0 +1,107 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Your profile{% endblock %}
+
+{% form_theme form _self %}
+
+{% block body %}
+    <div class="container text-center w-75 login mt-5 pt-5 pb-3 mb-5">
+        <h3 class="pb-5 regis"><span class="underline">Modify your profile</span> :</h3>
+        <div class="form-row pb-4">
+            <div class="col-5">
+                {{ form_start(form) }}
+                {{ form_row(form.username) }}
+            </div>
+            <div class="col-5">
+                {{ form_row(form.avatar) }}
+            </div>
+            <div class="col-2">
+                {% if app.user.avatar is not null %}
+                        <div style="height: 100px">
+                            <img src="/uploads/avatars/{{ app.user.avatar }}" alt="Profile picture" class="img-thumbnail">
+                        </div>
+                {% else %}
+                    <i class="fas fa-user-astronaut fa-4x"></i>
+                {% endif %}
+            </div>
+        </div>
+        <div class="form-row pb-4">
+            <div class="col-5">
+                {{ form_row(form.lastname) }}
+            </div>
+        </div>
+        <div class="form-row pb-4">
+            <div class="col-5">
+                {{ form_row(form.email) }}
+            </div>
+            <div class="col-7">
+                {{ form_row(form.birthdate) }}
+            </div>
+        </div>
+        <div class="form-row pb-4">
+            <div class="col-5">
+                {{ form_row(form.addresses) }}
+
+            </div>
+        </div>
+        <button type="submit" class="btn btn-success mt-4 mb-3">Modify</button>
+        {{ form_end(form) }}
+    </div>
+{% endblock %}
+
+{% block _account_addresses_widget %}
+
+    <p>Add an address</p>
+    {{ form_widget(form) }}
+    <input type="hidden" id="widgets-counter" value="0">
+    <div class="form-group">
+        <button type="button" id="add-address" class="btn btn-outline-dark">Add</button>
+    </div>
+
+{% endblock %}
+
+{% block _account_addresses_entry_row %}
+    <div class="form-group" id="block_{{ id }}">
+        <div class="row">
+            <div class="col-10">
+                {{ form_widget(form.name) }}
+            </div>
+            <div class="col-2">
+                <button type="button" data-action="delete" data-target="#block_{{ id }}" class="btn btn-danger">
+                    X
+                </button>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block javascripts %}
+
+    <script>
+        $('#add-address').click(function () {
+            const index = +$('#widgets-counter').val();
+            const tmpl = $('#account_addresses').data('prototype').replace(/__name__/g, index);
+
+            $('#account_addresses').append(tmpl);
+            $('#widgets-counter').val(index+1);
+
+            handleDeleteButtons();
+        });
+
+        function handleDeleteButtons(){
+            $('button[data-action="delete"]').click(function () {
+                const target = this.dataset.target;
+                $(target).remove();
+            })
+        }
+
+        function updateCounter(){
+            const count = +$('account_addresses div.form-group').length;
+            $('#widgets-counter').val(count);
+        }
+
+        updateCounter();
+        handleDeleteButtons()
+    </script>
+
+{% endblock %}
