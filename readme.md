@@ -8,6 +8,7 @@ DATABASE_URL=mysql://db_user:db_password@127.0.0.1:3306/db_name
 MAILER_URL=null://localhost
 
 <br>A few commands :
+
 3. php bin/console doctrine:database:create (d:d:c)
 4. php bin/console m:migration
 5. php bin/console doctrine:migrations:migrate (d:m:m)
