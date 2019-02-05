@@ -19,7 +19,7 @@ class SecurityController extends AbstractController
     /**
      * @Route("/register", name="register")
      */
-    public function registration(Request $request, ObjectManager $om, UserPasswordEncoderInterface $encoder)
+    public function registration(Request $request, ObjectManager $om, UserPasswordEncoderInterface $encoder, \Swift_Mailer $mailer)
     {
         $user = new User();
 
@@ -27,11 +27,25 @@ class SecurityController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            $mail = $user->getEmail();
+            $name = $user->getUsername();
             $hash = $encoder->encodePassword($user, $user->getPassword());
             $user->setPassword($hash);
             $user->setRegistration(new \DateTime('now'));
             $user->setActive(1);
 
+            $message = (new \Swift_Message('Welcome on DataP !'))
+                ->setFrom('exemple@dataprojekt')
+                ->setTo($mail)
+                ->setBody(
+                    $this->renderView(
+                        'mails/registration.html.twig',
+                        ['name' => $name]
+                    ),
+                    'text/html'
+                );
+
+            $message->
             $om->persist($user);
             $om->flush();
 
