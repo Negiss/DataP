@@ -3,9 +3,11 @@ Set db param :
 2. Enter your db id and choose a name for the db at line #27 :
 DATABASE_URL=mysql://db_user:db_password@127.0.0.1:3306/db_name
 
+<br>Set SMTP param :
+1. Modify the line #34 :
+MAILER_URL=null://localhost
 
-A few commands :
-
+<br>A few commands :
 3. php bin/console doctrine:database:create (d:d:c)
 4. php bin/console m:migration
 5. php bin/console doctrine:migrations:migrate (d:m:m)
